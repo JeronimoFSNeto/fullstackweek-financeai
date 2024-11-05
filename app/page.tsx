@@ -1,7 +1,23 @@
-const Home = () => {
+import { UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { dark } from "@clerk/themes";
+import { redirect } from "next/navigation";
+
+const Home = async () => {
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
+  }
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-100">
-      <h1 className="text-3xl font-bold underline">Home</h1>
+    <div className="h-hulll flex items-center justify-center">
+      <div>
+        <UserButton
+          showName
+          appearance={{
+            baseTheme: dark,
+          }}
+        />
+      </div>
     </div>
   );
 };
