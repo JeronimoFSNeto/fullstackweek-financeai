@@ -80,3 +80,6 @@ form do shadcn, react-hook-form e zos
 
 para formatar os números:
 npm i react-number-format@5.4.2
+
+Criar uma server actions | é uma função
+na pasta app criamos _actions, depois add-transaction e o arquivo index.ts
