@@ -72,3 +72,11 @@ e colar o codigo que estava no transactions dentro do cell, fazendo isso estamos
 
 criar um arquivo chamado .eslintignore
 e colocar tailwind.config.ts
+
+criar um componente add-transaction-button que vai ser reutilizada em dois lugares
+
+para lidar com formulario
+form do shadcn, react-hook-form e zos
+
+para formatar os números:
+npm i react-number-format@5.4.2

@@ -1,8 +1,7 @@
-import { ArrowDownUpIcon } from "lucide-react";
 import { db } from "../_lib/prisma";
-import { Button } from "../_components/ui/button";
 import { DataTable } from "../_components/ui/data-table";
 import { transactionColumns } from "./_columms";
+import AddTransactionButton from "../_components/add-transaction-button";
 
 // Esse arquivo é um Server Component -> Então não podemos usar useState, useEffect, onClick
 // mas podemos chamar um client component dentro de um server component como estamos fazendo com o DataTable
@@ -18,10 +17,7 @@ const TransactionsPage = async () => {
       {/* TÍTULO E BOTÃO */}
       <div className="flex w-full items-center justify-between">
         <h1 className="text-2xl font-bold">Transações</h1>
-        <Button className="rounded-full font-bold">
-          Adicionar transação
-          <ArrowDownUpIcon />
-        </Button>
+        <AddTransactionButton />
       </div>
 
       <DataTable columns={transactionColumns} data={transactions} />
