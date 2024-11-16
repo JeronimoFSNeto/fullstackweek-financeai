@@ -1,5 +1,18 @@
-const SubscriptionPage = () => {
-  return <div>Subscription</div>;
+import { auth } from "@clerk/nextjs/server";
+import Navbar from "../_components/navbar";
+import { redirect } from "next/navigation";
+
+const SubscriptionPage = async () => {
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
+  }
+  return (
+    <>
+      <Navbar />
+      <div>Subscription</div>
+    </>
+  );
 };
 
 export default SubscriptionPage;
