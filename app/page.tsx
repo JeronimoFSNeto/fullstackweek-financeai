@@ -1,7 +1,6 @@
-import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { dark } from "@clerk/themes";
 import { redirect } from "next/navigation";
+import Navbar from "./_components/navbar";
 
 const Home = async () => {
   const { userId } = await auth();
@@ -9,16 +8,14 @@ const Home = async () => {
     redirect("/login");
   }
   return (
-    <div className="h-hulll flex items-center justify-center">
-      <div>
-        <UserButton
-          showName
-          appearance={{
-            baseTheme: dark,
-          }}
-        />
+    <>
+      <Navbar />
+      <div className="flex h-full items-center justify-center">
+        <div>
+          <h1>Dashboard</h1>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

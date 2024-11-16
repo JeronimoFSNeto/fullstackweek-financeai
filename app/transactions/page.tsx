@@ -18,7 +18,14 @@ const TransactionsPage = async () => {
   // TODO acessar as transações do meu banco de dados
   // pegando todas as transasões que estão na tabela transaction
   // {} objeto vazio
-  const transactions = await db.transaction.findMany({});
+  const transactions = await db.transaction.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   return (
     <>
