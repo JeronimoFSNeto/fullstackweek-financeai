@@ -3,14 +3,12 @@
 import { Transaction } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import TransactionTypeBadge from "../_components/type-badge";
-import { PencilIcon, TrashIcon } from "lucide-react";
-import { Button } from "@/app/_components/ui/button";
-// import {
-//   TRANSACTION_CATEGORY_LABELS,
-//   TRANSACTION_PAYMENT_METHOD_LABELS,
-// } from "@/app/_constants/transactions";
-// import EditTransactionButton from "../_components/edit-transaction-button";
-// import DeleteTransactionButton from "../_components/delete-transaction-button";
+import {
+  TRANSACTION_CATEGORY_LABELS,
+  TRANSACTION_PAYMENT_METHOD_LABELS,
+} from "@/app/_constants/transactions";
+import EditTransactionButton from "../_components/edit-transaction-button";
+import DeleteTransactionButton from "../_components/delete-transaction-button";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -28,14 +26,14 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "category",
     header: "Categoria",
-    // cell: ({ row: { original: transaction } }) =>
-    //   TRANSACTION_CATEGORY_LABELS[transaction.category],
+    cell: ({ row: { original: transaction } }) =>
+      TRANSACTION_CATEGORY_LABELS[transaction.category],
   },
   {
     accessorKey: "paymentMethod",
     header: "Método de Pagamento",
-    // cell: ({ row: { original: transaction } }) =>
-    // TRANSACTION_PAYMENT_METHOD_LABELS[transaction.paymentMethod],
+    cell: ({ row: { original: transaction } }) =>
+      TRANSACTION_PAYMENT_METHOD_LABELS[transaction.paymentMethod],
   },
   {
     accessorKey: "date",
@@ -59,25 +57,11 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "actions",
     header: "Ações",
-    // cell: ({ row: { original: transaction } }) => {
-    // return (
-
-    // <div className="space-x-1">
-    //   <EditTransactionButton transaction={transaction} />
-    //   <DeleteTransactionButton transactionId={transaction.id} />
-    // </div>
-    // );
-    // },
-    cell: () => {
+    cell: ({ row: { original: transaction } }) => {
       return (
         <div className="space-x-1">
-          <Button variant="ghost" size="icon" className="text-muted-foreground">
-            <PencilIcon />
-          </Button>
-
-          <Button variant="ghost" size="icon" className="text-muted-foreground">
-            <TrashIcon />
-          </Button>
+          <EditTransactionButton transaction={transaction} />
+          <DeleteTransactionButton transactionId={transaction.id} />
         </div>
       );
     },
