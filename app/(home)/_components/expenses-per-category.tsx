@@ -18,6 +18,7 @@ const ExpensesPerCategory = ({
       </CardHeader>
 
       <CardContent className="space-y-6">
+        {/*  */}
         {expensesPerCategory.map((category) => (
           <div key={category.category} className="space-y-2">
             <div className="flex w-full justify-between">

@@ -117,3 +117,9 @@ _componentes/transactions-pie-chart.tsx
 Criado a pasta _data/get-dashboard/index.ts para ter em um unico lugar para chamar os dados do banco de dados e ser
 importado pelos componentes
 E criado o types.ts na mesma pasta
+
+Para gastos por categoria:
+sroll-area
+progress
+
+altera as propriedades do component progress
