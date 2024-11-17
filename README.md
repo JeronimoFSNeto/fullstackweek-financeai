@@ -83,3 +83,37 @@ npm i react-number-format@5.4.2
 
 Criar uma server actions | é uma função
 na pasta app criamos _actions, depois add-transaction e o arquivo index.ts
+
+### Criar a navbar
+
+Criando o arqivo navbar.tsx dentro de _components
+
+validando se usario logado ou não
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
+  }
+
+Agora a parte de filtro de mês, saldo, investimento , receita e despesas
+
+- pegar informações do banco de dados
+- e criar um componente para renderizar os 4 campos
+
+Criar um auto group com o nome (home), especia de pasta para organizar, mas não vai ser usada na rota
+exemplo
+(home)/transactions
+<http://localhost:3000/transactions>
+
+Dentro de (home), criaremos _components e o summary-cards.tsx e usaremos a lib card do shadcn
+
+Vamos precisar de uma div para englobar os 4 componentes(saldo, investimento, receita e despesas)
+
+### Criando o gráfico
+
+É usado o chart do Shadcn
+arquivos:
+_componentes/transactions-pie-chart.tsx
+
+Criado a pasta _data/get-dashboard/index.ts para ter em um unico lugar para chamar os dados do banco de dados e ser
+importado pelos componentes
+E criado o types.ts na mesma pasta
