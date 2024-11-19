@@ -118,8 +118,11 @@ Criado a pasta _data/get-dashboard/index.ts para ter em um unico lugar para cham
 importado pelos componentes
 E criado o types.ts na mesma pasta
 
-Para gastos por categoria:
+### Para gastos por categoria:
 sroll-area
 progress
 
 altera as propriedades do component progress
+
+### Component LastTransactions | Últimas Transações
+
