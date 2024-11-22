@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Full Stack Week - Finance Ai
 
-## Getting Started
+- TypeScript
+- PostegreSQL
 
-First, run the development server:
+## Registrando aula 3
+
+Usando a conta Neon.tech para hospedar o banco de dados, depois de realizar o primeiro migrate
+Criei uma nova variavel chamada DATABASE_URL_PROD
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx prisma migrate deploy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Agora copiar as configurações do clerk para o .env
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+CRIANDO TELA DE TRANSAÇÃO
+função assicrona = async
 
-## Learn More
+criar dentro de lib o arquivo prisma.ts
+instalar:
+npm i @prisma/client@5.21.1
 
-To learn more about Next.js, take a look at the following resources:
+npx prisma studio
+<http://localhost:5555>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Exibindo apnas a coluna name da tabela transactions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+import { db } from "../_lib/prisma";
 
-## Deploy on Vercel
+// Esse arquivo é um Server Component
+const TransactionsPage = async () => {
+  // TODO acessar as transações do meu banco de dados
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  // pegando todas as transasões que estão na tabela transaction
+  // {} objeto vazio
+  const transactions = await db.transaction.findMany({});
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  return (
+    <div>
+      {transactions.map((transaction) => (
+        <div key={transaction.id}>{transaction.name}</div>
+      ))}
+    </div>
+  );
+};
+
+export default TransactionsPage;
+
+```
+
+Instalar a component do shadcn Data Table
+npx shadcn@2.1.3 add table
+npm i @tanstack/react-table@8.20.5
+
+Dentro de ui, crie data-table.tsx
+
+E importe Table de ./table
+Em transactions, uma pasta _columms e nela o index.ts
+
+Instalar o como
+badge
+
+criar um novo componente dentro da pasta transactions, _componentes e o arquivo type-badge.tsx
+e colar o codigo que estava no transactions dentro do cell, fazendo isso estamos refatorando
+
+criar um arquivo chamado .eslintignore
+e colocar tailwind.config.ts
+
+criar um componente add-transaction-button que vai ser reutilizada em dois lugares
+
+para lidar com formulario
+form do shadcn, react-hook-form e zos
+
+para formatar os números:
+npm i react-number-format@5.4.2
+
+Criar uma server actions | é uma função
+na pasta app criamos _actions, depois add-transaction e o arquivo index.ts
+
+### Criar a navbar
+
+Criando o arqivo navbar.tsx dentro de _components
+
+validando se usario logado ou não
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
+  }
+
+Agora a parte de filtro de mês, saldo, investimento , receita e despesas
+
+- pegar informações do banco de dados
+- e criar um componente para renderizar os 4 campos
+
+Criar um auto group com o nome (home), especia de pasta para organizar, mas não vai ser usada na rota
+exemplo
+(home)/transactions
+<http://localhost:3000/transactions>
+
+Dentro de (home), criaremos _components e o summary-cards.tsx e usaremos a lib card do shadcn
+
+Vamos precisar de uma div para englobar os 4 componentes(saldo, investimento, receita e despesas)
+
+### Criando o gráfico
+
+É usado o chart do Shadcn
+arquivos:
+_componentes/transactions-pie-chart.tsx
+
+Criado a pasta _data/get-dashboard/index.ts para ter em um unico lugar para chamar os dados do banco de dados e ser
+importado pelos componentes
+E criado o types.ts na mesma pasta
+
+### Para gastos por categoria:
+sroll-area
+progress
+
+altera as propriedades do component progress
+
+### Component LastTransactions | Últimas Transações
+

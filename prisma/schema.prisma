@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_PROD")
 }
 
 model Transaction {
@@ -23,6 +23,7 @@ model Transaction {
   date          DateTime
   createdAt     DateTime                 @default(now())
   updatedAt     DateTime                 @updatedAt
+  userId        String
 }
 
 enum TransactionType {
